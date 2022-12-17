@@ -19,6 +19,6 @@ router.use("/activities", activityRouter);
     } catch (error) {
         return error
     }
-})*/
+});*/
 
 module.exports = router;

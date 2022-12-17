@@ -16,7 +16,7 @@ const getApiInfo = async () => {
         area: country.area,
         population: country.population,
       };
-    });
+    })
 
     return apiData;
   } catch (error) {

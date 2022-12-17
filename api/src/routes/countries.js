@@ -40,6 +40,6 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     console.log("backend error, req.params id");
   }
-});
+})
 
 module.exports = router;
