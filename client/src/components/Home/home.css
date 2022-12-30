@@ -1,0 +1,40 @@
+.menuBox {
+    background-color: #ffffff10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12PX);
+}
+
+.box {
+    background-color: #ffffff10;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(12PX);
+    margin-top: 2vh;
+    border-radius: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.addActivity {
+    margin-top: 2vh;
+}
+
+.searchBar {
+    margin-bottom: 2vh;
+}
+
+.countryCard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 3vh;
+  grid-row-gap: 35px;
+}
+
+.dataCard {
+    padding: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #d3e3f1;
+    border-radius: 20px;
+    border: 5px solid #b5d9f8;
+}
