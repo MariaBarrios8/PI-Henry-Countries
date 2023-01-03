@@ -19,12 +19,19 @@ export default function SearchBar() {
         dispatch(getCountryName(name))
     }
 
+    function handleKeypress(e) {
+        if(e.keyCode === 13) {
+            handleSubmit(e)
+        }
+    }
+
     return (
         <div>
             <input 
             type="text"
             placeholder="Search..."
             onChange={(e) => handleInputChange(e)}
+            onKeyDown={(e) => handleKeypress(e)}
             />
             <button type="submit" onClick={(e) => handleSubmit(e)}>🔍</button>
         </div>

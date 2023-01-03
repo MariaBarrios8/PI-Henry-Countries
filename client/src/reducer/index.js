@@ -1,3 +1,5 @@
+import { exportable } from "../helpers/trytry";
+
 const initialState = {
   countries: [],
   allCountries: [],
@@ -28,11 +30,14 @@ function rootReducer(state = initialState, action) {
         countries: countryOrder,
       };
     case "FILTER_BY_CONTINENT": 
-    const allContinents = state.countries
-    const filterContinent = action.payload === 'all' ? allContinents : allContinents.filter(c => c.region === action.payload)
+    {/*const allContinents = state.countries
+    const filterContinent = action.payload === 'all' ? allContinents : allContinents.filter(c => c.continent === action.payload)*/}
+    const filtradisimo = action.payload === 'all' ? state.allCountries : state.allCountries.filter((country) => {
+      return country.continent.includes(action.payload)
+    })
     return {
       ...state,
-      countries: filterContinent
+      countries: filtradisimo
     }
     case "ORDER_BY_POPULATION":
       let populationOrder = [...state.countries];

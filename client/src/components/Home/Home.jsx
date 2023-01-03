@@ -81,56 +81,73 @@ export default function Home() {
   //orden por tipos de actividades
 
   //orden por continente
+  function handleFilterByContinents(e) {
+    e.preventDefault();
+    dispatch(filterByContinent(e.target.value));
+  }
 
   return (
     <div>
-    <div className="box">
-      <Link to="">
-        <button className="addActivity">Add an activity</button>
-      </Link>
-      <h1>Henry Countries Proyect</h1>
-      <button
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Reload all countries
-      </button>
+      <div className="box">
+        <Link to="">
+          <button className="addActivity">Add an activity</button>
+        </Link>
+        <h1>Henry Countries Proyect</h1>
+        <button
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Reload all countries
+        </button>
 
-      <div>
-        <select className="Orden-alfabetico" onChange={(e) => handleSort(e)}>
-          <option hidden="AllTheGames">Alphabetical order</option>
-          <option value="asc">A - Z order</option>
-          <option value="des">Z - A order</option>
-        </select>
-        <select className="Population" onChange={(e) => handlePopulation(e)}>
-          <option hidden="population">Population</option>
-          <option value="high">Higher population first</option>
-          <option value="low">Lower population first</option>
-        </select>
-        <select className="Activities">
-          <option hidden='activities'>Activities</option>
-        </select>
-        <select className="Continents">
-          <option hidden='contienents'>Continents</option>
-        </select>
         <div>
-          <Pagination
-            countryPerPage={countryPerPage}
-            allCountries={allCountries.length}
-            pagination={pagination}
-            prevPage={prevPage}
-            nextPage={nextPage}
-          />
+          <select className="Orden-alfabetico" onChange={(e) => handleSort(e)}>
+            <option hidden="AllTheGames">Alphabetical order</option>
+            <option value="asc">A - Z order</option>
+            <option value="des">Z - A order</option>
+          </select>
+          <select className="Population" onChange={(e) => handlePopulation(e)}>
+            <option hidden="population">Population</option>
+            <option value="high">Higher population first</option>
+            <option value="low">Lower population first</option>
+          </select>
+          <select className="Activities">
+            <option hidden="activities">Activities</option>
+          </select>
+          <select
+            className="Continents"
+            onChange={(e) => handleFilterByContinents(e)}
+          >
+            <option hidden="contienents">Continents</option>
+            <option value="all">All</option>
+            <option>Africa</option>
+            <option>Antarctica</option>
+            <option>Asia</option>
+            <option>Oceania</option>
+            <option>Europe</option>
+            <option>North America</option>
+            <option>South America</option>
+          </select>
+          <div>
+            <Pagination
+              countryPerPage={countryPerPage}
+              allCountries={allCountries.length}
+              pagination={pagination}
+              prevPage={prevPage}
+              nextPage={nextPage}
+            />
+          </div>
+          <div className="searchBar">
+            <SearchBar />
+          </div>
         </div>
-        <div className='searchBar'>
-        <SearchBar />
-        </div></div>
         <div className="countryCard">
           {currentCountries?.map((el) => {
             return (
               <div className="dataCard">
                 <Card
+                  key={el.id}
                   flag={el.flag}
                   name={el.name}
                   continent={el.continent}
