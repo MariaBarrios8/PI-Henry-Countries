@@ -147,7 +147,7 @@ export default function Home() {
             return (
               <div className="dataCard">
                 <Card
-                  key={el.id}
+                  id={el.id}
                   flag={el.flag}
                   name={el.name}
                   continent={el.continent}

@@ -35,16 +35,22 @@ export function getCountryName(name) {
 export function getCountryDetail(id) {
   return async function (dispatch) {
     try {
-      let oneCountry = await axios.get(`http://localhost:3001/countries/${id}`);
+      let oneCountry = await axios.get('http://localhost:3001/countries/' + id);
 
       return dispatch({
         type: "GET_COUNTRY_DETAIL",
-        payload: oneCountry,
+        payload: oneCountry.data,
       });
     } catch (error) {
       console.log(error, "frontend error, getCountryDetail");
     }
   };
+}
+
+export function setDetailCountry() {
+  return {
+    type: "SET_DETAIL_COUNTRY"
+  }
 }
 
 export function orderCountriesByName(payload) {

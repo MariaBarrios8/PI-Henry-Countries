@@ -20,6 +20,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: action.payload,
       };
+    case "GET_COUNTRY_DETAIL": 
+    return {
+      ...state,
+      detail: action.payload
+    }
+    case "SET_DETAIL_COUNTRY":
+      return {
+        ...state,
+        detail: {}
+      }
     case "ORDER_BY_NAME":
       const countryOrder =
         action.payload === "asc"

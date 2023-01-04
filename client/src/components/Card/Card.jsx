@@ -8,11 +8,13 @@ export default function Card({ flag, name, continent, population, id }) {
       <div className="CardBody">
         <h1>{name}</h1>
         <h3>Continent: {continent}</h3>
-        <h3>Population: {population} habitants</h3>
+        <h3>Population of: {population} habitants</h3>
         <br></br>
-        <Link>
+        <div className="readmore">
+        <Link to={`/home/${id}`}>
           <button>Read more</button>
         </Link>
+        </div>
       </div>
     </div>
   );
