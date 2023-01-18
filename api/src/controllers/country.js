@@ -16,7 +16,7 @@ const getApiInfo = async () => {
         area: country.area,
         population: country.population,
       };
-    })
+    });
 
     return apiData;
   } catch (error) {
@@ -48,7 +48,7 @@ const getAllCountries = async () => {
   return infoCountryTotal;
 };
 
-/*const getActivities = async () => {
+const getActivities = async () => {
   try {
     const get = await Activity.findAll();
     return get;
@@ -56,14 +56,103 @@ const getAllCountries = async () => {
     console.log("Backend error, request activities");
     return error
   }
-};*/
+};
+
+const createActivity = async (req, res) => {
+  const { name, difficulty, duration, season, countries } = req.body;
+  const newActivity = {
+    name,
+    difficulty,
+    duration,
+    season,
+  };
+  const validate = await Activity.findOne({
+    where: {
+      name,
+    }
+  });
+  if(!validate) {
+    const actCreate = await Activity.create(newActivity)
+    console.log(countries)
+    let actDb = await Country.findAll({ where: {name: countries} ///No está encontrando el COUNTRY DEBUGG
+    })
+    console.log(actDb)
+    await actCreate.addCountry(actDb)  //metodo de SQL que lo que hace es traerme de la tabla lo que le pido por parametro
+    res.status(200).send('Activity created succesfully')
+  } else {
+    let actCreate2 = await Country.findAll({
+      where: {
+        name: countries
+      }
+    })
+    console.log('actCrate2', actCreate2)
+    await validate.addCountry(actCreate2)
+    res.status(200).send('Activity created succesfully')
+  }
+}
+
+
 
 module.exports = {
   getApiInfo,
   getDbInfo,
-  //getActivities,
+  getActivities,
   getAllCountries,
+  createActivity
 };
+
+
+/*const createActivity = async (req, res) => {
+  let { name, difficulty, duration, season, countries } = req.body;
+  if (!name)
+    return res.json({ Problem: "name is mandatory! Please choose one!" });
+
+  const validate = await Activity.findOne({
+    where: {
+      name: name,
+    },
+  });
+
+  if (validate)
+    return res.json({
+      Problem: "That activity is already created, please try another one",
+    });
+
+  let newActivity = await Activity.create({
+    name,
+    difficulty,
+    duration,
+    season,
+  })
+  console.log(newActivity)
+  await Promise.all(countries.map(async e => {
+    console.log('the countries: ', countries)
+    await newActivity.addCountries([
+      (await Country.findOrCreate({
+        where: {
+          name: e
+        }
+      }))[0].dataValues.id
+    ])
+  }))
+
+  console.log('se creó esto ---> ', newActivity)
+
+  let asociateCountry = await Activity.findOne({
+    where: {
+      name: name
+    },
+    include: {
+      model: Activity,
+      attributes: ['name'],
+      through: {
+        attributes: []
+      }
+    }
+  })
+  console.log('esto fue asociado', asociateCountry)
+  res.status(200).send(asociateCountry)
+};*/
 
 /*const getApiInfo = async () => {
   const apiUrl = await axios.get("https://restcountries.com/v3/all");
@@ -104,5 +193,3 @@ const getDbInfo = async () => {
   const infoTotal = dbInfo.concat(apiInfo);
   return infoTotal;
 };*/
-
-
