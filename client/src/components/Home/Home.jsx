@@ -66,7 +66,7 @@ export default function Home() {
   function handleSort(e) {
     e.preventDefault();
     dispatch(orderCountriesByName(e.target.value));
-    setCountryPerPage(1);
+    setCurrentPage(1);
     setOrder(`${e.target.value}`);
   }
 
@@ -74,7 +74,7 @@ export default function Home() {
   function handlePopulation(e) {
     e.preventDefault();
     dispatch(orderByPopulation(e.target.value));
-    setCountryPerPage(1);
+    setCurrentPage(1);
     setPopulation(`${e.target.value}`);
   }
 
@@ -89,7 +89,7 @@ export default function Home() {
   return (
     <div>
       <div className="box">
-        <Link to="">
+        <Link to="/form">
           <button className="addActivity">Add an activity</button>
         </Link>
         <h1>Henry Countries Proyect</h1>
@@ -101,20 +101,23 @@ export default function Home() {
           Reload all countries
         </button>
 
-        <div>
+        <div className="selections">
           <select className="Orden-alfabetico" onChange={(e) => handleSort(e)}>
             <option hidden="AllTheGames">Alphabetical order</option>
             <option value="asc">A - Z order</option>
             <option value="des">Z - A order</option>
           </select>
+          <i className="i"></i>
           <select className="Population" onChange={(e) => handlePopulation(e)}>
             <option hidden="population">Population</option>
             <option value="high">Higher population first</option>
             <option value="low">Lower population first</option>
           </select>
+          <i className="i"></i>
           <select className="Activities">
             <option hidden="activities">Activities</option>
           </select>
+          <i className="i"></i>
           <select
             className="Continents"
             onChange={(e) => handleFilterByContinents(e)}
@@ -129,7 +132,8 @@ export default function Home() {
             <option>North America</option>
             <option>South America</option>
           </select>
-          <div>
+          <i className="i"></i>
+          <div className="pagination">
             <Pagination
               countryPerPage={countryPerPage}
               allCountries={allCountries.length}
@@ -158,7 +162,7 @@ export default function Home() {
           })}
         </div>
       </div>
-      <Link to="">
+      <Link to="/form">
         <button className="addActivity">Add an activity</button>
       </Link>
     </div>

@@ -1,12 +1,11 @@
-const { Router } = require("express")
+const { Router } = require("express");
 const router = Router();
 
 const { Country, Activity } = require("../db");
 const { getActivities } = require("../controllers/country");
 
-
 //FIX THIS TF
-router.get("/", async (req, res) => {
+router.get("/activities", async (req, res) => {
   try {
     const dbAct = await Activity.findAll({
       attibutes: ["name"],
@@ -15,11 +14,11 @@ router.get("/", async (req, res) => {
     console.log(dbAct);
     res.status(200).send(dbAct);
   } catch (error) {
-    res.status(400).send("lawea");
+    res.status(400).send("backend error, route get activities");
   }
 });
 
-router.post("/", async (req, res) => {
+/*router.post("/", async (req, res) => {
   const { name, difficulty, duration, season, countries } = req.body;
   const newActivity = {
     name,
@@ -27,13 +26,13 @@ router.post("/", async (req, res) => {
     duration,
     season,
   };
+  const validateAct = await Activity.findOne({
+    where: {
+      name: name,
+    },
+  });
 
   try {
-    const validateAct = await Activity.findOne({
-      where: {
-        name: name,
-      },
-    });
     if (!validateAct) {
       const createActivity = await Activity.create(newActivity);
       let matchCountry = await Country.findAll({
@@ -55,6 +54,6 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+});*/
 
 module.exports = router;

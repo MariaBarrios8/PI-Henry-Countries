@@ -5,9 +5,9 @@
 }
 
 .box {
-    background-color: #ffffff10;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(12PX);
+    background-color: #ffffff2d;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20PX);
     margin-top: 2vh;
     border-radius: 50px;
     margin-left: 50px;
@@ -19,7 +19,49 @@
 }
 
 .searchBar {
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
+}
+
+.selections select{
+    margin-top: 2vh;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 3px;
+    padding: 7px 10px;
+    padding-right: 3px;
+    height: 42px;
+    border-radius: 5px;
+    background: #c5ffe3;
+    color: #222222;
+    font-size: 1em;
+    font-family: 'Quicksand', sans-serif;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.selections select:hover {
+    background: #B1E8CD;
+}
+
+/*.i {
+    position: absolute;
+	right: 20px;
+	top: calc(50% - 13px);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #2AC176;
+	border-bottom:4px solid #2AC176;
+	transform: rotate(-45deg); /* Giramos el cuadrado 
+	transition: all 0.25s ease;
+}
+.i:hover {
+    margin-top: 3px;
+}*/
+
+.pagination {
+    margin-right: 5vh;
 }
 
 .countryCard {

@@ -65,6 +65,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: populationOrder
       }
+    case "GET_ACTIVITIES":
+      return {
+        ...state,
+        activities: action.payload
+      }
     default:
       return state;
   }

@@ -1,0 +1,31 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+}
+
+
+input {
+    border: hidden;
+    margin-top: 2.5rem;
+    height: 2em;
+    background-color: #4cafa3;
+    color: #121516
+}
+
+button {
+    height: 30px;
+    margin-top: 2.5em;
+    border-color: #2e8379;
+    background-color: #2e8379;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #1c645c;
+}
+
+button:active {
+    background-color: #1c645c;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getTheCountries, postActivity } from "../../actions";
+import './form.css'
 
 function validateCreateActivity(input) {
   const error = {};
@@ -25,7 +26,7 @@ function validateCreateActivity(input) {
 
 export default function ActivitiesCreate() {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
   const allCountries = useSelector((state) => state.allCountries);
 
   const [error, setError] = useState({});
@@ -34,6 +35,7 @@ export default function ActivitiesCreate() {
     name: "",
     difficulty: "",
     duration: "",
+    season: "",
     countries: [],
   });
 
@@ -46,6 +48,7 @@ export default function ActivitiesCreate() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    console.log(input)
     setError(
       validateCreateActivity({
         ...input,
@@ -73,6 +76,7 @@ export default function ActivitiesCreate() {
         countries: [...input.countries, e.target.value],
       });
   }
+  console.log(input)
 
   function handleDelete(e) {
     setInput({
@@ -83,6 +87,7 @@ export default function ActivitiesCreate() {
 
   function handleSubmit(el) {
     el.preventDefault();
+    console.log(input)
     setError(validateCreateActivity(input));
     const horrores = validateCreateActivity(input);
     if (Object.values(horrores).length !== 0) {
@@ -94,20 +99,20 @@ export default function ActivitiesCreate() {
         name: "",
         difficulty: "",
         duration: "",
-        duration: "",
         season: "",
         countries: [],
       });
-      history("/home");
+      history.push("/home");
     }
   }
 
   return (
-    <div>
-      <title>Create a new tourist activity</title>
+    <div className="bigBox">
+      <div className="contentBox">
+      <h1>Create a new tourist activity</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="errorMsg">
-          <label>Name:</label>
+        <div className="input">
+          <label>Name:   </label>
           <input
             placeholder="Ej: (ski...)"
             type="text"
@@ -115,11 +120,13 @@ export default function ActivitiesCreate() {
             name="name"
             onChange={(e) => handleChange(e)}
           />
+          <div className="errorMsg">
           {error.name && <p>{error.name}</p>}
+          </div>
         </div>
         <br />
-        <div className="errorMsg">
-          <label>Difficulty:</label>
+        <div className="input">
+          <label>Difficulty:  </label>
           <input
             placeholder="1 - 5"
             type="number"
@@ -129,19 +136,24 @@ export default function ActivitiesCreate() {
             name="difficulty"
             onChange={(e) => handleChange(e)}
           />
+          <div className="errorMsg">
           {error.difficulty && <p>{error.difficulty}</p>}
+          </div>
         </div>
         <br />
-        <div className="errorMsg">
-          <label>Duration:</label>
+        <div className="input">
+          <label>Duration in hours: </label>
           <input
             placeholder="Ej: (1 hour...)"
             type="number"
             value={input.duration}
-            name="name"
+            min={1}
+            name="duration"
             onChange={(e) => handleChange(e)}
           />
+          <div className="errorMsg">
           {error.duration && <p>{error.duration}</p>}
+          </div>
         </div>
         <br />
         <div>
@@ -149,7 +161,7 @@ export default function ActivitiesCreate() {
           <label>
             <input
               type="radio"
-              value="summer"
+              value="Summer"
               name="check"
               onChange={(e) => handleCheck(e)}
             />
@@ -158,7 +170,7 @@ export default function ActivitiesCreate() {
           <label>
             <input
               type="radio"
-              value="autumn"
+              value="Autumn"
               name="check"
               onChange={(e) => handleCheck(e)}
             />
@@ -167,7 +179,7 @@ export default function ActivitiesCreate() {
           <label>
             <input
               type="radio"
-              value="winter"
+              value="Winter"
               name="check"
               onChange={(e) => handleCheck(e)}
             />
@@ -176,25 +188,36 @@ export default function ActivitiesCreate() {
           <label>
             <input
               type="radio"
-              value="spring"
+              value="Spring"
               name="check"
               onChange={(e) => handleCheck(e)}
             />
             Spring
           </label>
           <div className="errorMsg">
-            {error.season && (<p>{error.season}</p>)}
+            {error.season && <p>{error.season}</p>}
           </div>
-        </div><br />
-        <div>
-            <select onChange={(e) => handleSelect(e)} >
-                <option value='country'>Countries:</option>
-                {allCountries.map(c => 
-                    <option value={c.name}>{c.name}</option>
-                    )}
-            </select>
         </div>
+        <br />
+        <div className="countrySelection">
+          <select onChange={(e) => handleSelect(e)}>
+            <option value="country">Countries:</option>
+            {allCountries.map((c) => (
+              <option key={c.name} value={c.name}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </div><br />
+        {input.countries.map((el) => (<button key={el} className='deleteButton' onClick={() => handleDelete(el)}>{el} X</button>))} <br />
+        <div>
+            <button className="submit" type="submit">Create activity</button><br />
+        </div><br />
       </form>
+      <Link to="/home">
+        <button className="backHome">Back to home</button>
+      </Link>
+    </div>
     </div>
   );
 }

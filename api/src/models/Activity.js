@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      unique: true,
+      allowNull: false,
       defaultValue: UUIDV4
     },
     name: {
@@ -22,11 +22,11 @@ module.exports = (sequelize) => {
       }
     },
     duration: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     season: {
-      type: DataTypes.ENUM('Summer', 'Autum', 'Winter', 'Spring'),
+      type: DataTypes.ENUM('Summer', 'Autumn', 'Winter', 'Spring'),
       allowNull: false
     }
   });
